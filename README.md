@@ -11,7 +11,13 @@ func main() {
   // create inventory
   inventory := r.Inventory()
   // params is http params
-  response := inventory.Create(params)
+  header := request.Header{
+    Authorization: r.Authorization(),
+    Accept: "application/json",
+    ContentType: "application/json",
+  }
+  ctx := context.WithValue(context.Background(),"HEADERS", &header)
+  response := inventory.Create(ctx, params)
   fmt.Println(response.Code)
   fmt.Println(response.Error)
   fmt.Println(response.Message) 

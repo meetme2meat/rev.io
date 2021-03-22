@@ -1,6 +1,8 @@
 package inventory
 
 import (
+	"context"
+
 	"github.com/meetme2meat/rev.io/http"
 )
 
@@ -8,8 +10,8 @@ type Inventory struct {
 	http.HTTPClient
 }
 
-func (i Inventory) Create(params interface{}) InventoryResponse {
-	response, err := i.POST("https://restapi.rev.io/v1/InventoryItem")
+func (i Inventory) Create(ctx context.Context, params interface{}) InventoryResponse {
+	response, err := i.POST(ctx, "https://restapi.rev.io/v1/InventoryItem")
 	if err != nil {
 		return InventoryResponse{
 			Code:    500,
@@ -26,8 +28,8 @@ func (i Inventory) Create(params interface{}) InventoryResponse {
 	}
 }
 
-func (i Inventory) Get(params interface{}) InventoryResponse {
-	response, err := i.GET("https://restapi.rev.io/v1/InventoryItem")
+func (i Inventory) Get(ctx context.Context, params interface{}) InventoryResponse {
+	response, err := i.GET(ctx, "https://restapi.rev.io/v1/InventoryItem")
 	if err != nil {
 		return InventoryResponse{
 			Code:    500,

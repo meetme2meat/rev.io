@@ -22,9 +22,7 @@ func New(username, client_code, password string) Revio {
 		password: password,
 	}
 
-	r.HTTPClient = http.HTTP{
-		Authorization: r.Authorization(),
-	}
+	r.HTTPClient = &http.HTTP{}
 
 	return r
 }
@@ -60,4 +58,5 @@ func (r Revio) Inventory() inventory.Inventory {
 // package main
 // import "github.com/meetme2meat/rev.io/revio"
 // revio.New().Inventory().Create()
+//
 // r.Inventory()
